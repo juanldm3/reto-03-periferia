@@ -1,0 +1,26 @@
+{
+  "name": "reto-03-agente-oc",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agente conversacional que prepara y crea órdenes de compra en un SAP simulado (Reto 3 Periferia IT Group)",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env --watch src/server.ts",
+    "start": "node --env-file-if-exists=.env src/server.ts",
+    "demo": "node demo.ts",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit",
+    "modulo": "node scripts/build-modulo.ts"
+  },
+  "dependencies": {
+    "pdf-lib": "1.17.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "typescript": "5.9.3"
+  }
+}

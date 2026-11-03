@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agente de órdenes de compra · Periferia</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Agente de órdenes de compra</h1>
+      <p class="sub">SAP simulado · Reto 3 Periferia IT Group</p>
+    </div>
+    <div class="estado">
+      <span id="modelo">Consultando modelo…</span>
+      <input id="clave" type="password" placeholder="Clave de acceso" hidden />
+      <button id="nueva" type="button">Nueva sesión</button>
+    </div>
+  </header>
+
+  <main id="chat" aria-live="polite">
+    <div class="bienvenida">
+      <p>Pídeme que procese una solicitud. Casos disponibles: <code>sol-001</code> a <code>sol-006</code>.</p>
+      <div class="sugerencias">
+        <button type="button" data-msg="Procesa la solicitud sol-001">Procesa sol-001</button>
+        <button type="button" data-msg='Procesa la solicitud "sol-004". Muéstrame la OC como quedaría en SAP, qué validaciones pasó y cuáles no, y no la crees hasta que yo lo confirme.'>Procesa sol-004 (ejemplo del PRD)</button>
+        <button type="button" data-msg="Procesa la solicitud sol-002">Procesa sol-002</button>
+        <button type="button" data-msg="Procesa la solicitud sol-005">Procesa sol-005</button>
+      </div>
+    </div>
+  </main>
+
+  <div id="confirmacion" class="confirmacion" hidden>
+    <strong>El agente espera tu confirmación</strong>
+    <span id="confirmacion-detalle"></span>
+    <button type="button" id="si">Confirmo, crea la OC</button>
+    <button type="button" id="no" class="secundario">No, cancela</button>
+  </div>
+
+  <form id="form">
+    <input id="mensaje" autocomplete="off" placeholder="Ej.: procesa la solicitud sol-003" maxlength="4000" />
+    <button type="submit" id="enviar">Enviar</button>
+  </form>
+
+  <script src="/app.js"></script>
+</body>
+</html>
