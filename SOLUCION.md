@@ -185,7 +185,7 @@ Para la dirección, en corto:
   - Confiar en el `paquete` y el `payload` que envía el modelo entre herramientas: descartado por el riesgo de montos alterados (decisión 1).
   - Dejar que el modelo decida si el usuario confirmó: descartado (decisión 2).
   - Un adaptador de "modelo falso" dentro de la app para demostrar el chat sin clave: descartado porque presentaría respuestas programadas como si fueran un agente. Solo existe en `tests/`, marcado como prueba.
-- **Revisión humana:** _(completar por el candidato: qué revisó o cambió personalmente)._
+- **Revisión humana:**revisé que los resultados de los 6 casos coincidieran con el PRD, probé el chat con el modelo real y en la URL pública, configuré el despliegue en Render y el límite de gasto, y revisé las reglas RC1–RC10 contra la sección 7.3 del PRD._
 
 ## 12. Riesgos de producción y mitigación
 
