@@ -2,8 +2,9 @@
 
 Agente que lee el paquete de una compra (solicitud, cotización, aprobación y, a veces, factura), lo valida contra los maestros, construye la OC, genera la evidencia de aprobación y la crea en un SAP simulado. Las excepciones se bloquean o se convierten en confirmaciones humanas.
 
-- **Link de prueba:** `PENDIENTE: URL de Render`
-- **Clave de acceso al link:** solo si se configuró `APP_ACCESS_KEY` (se entrega aparte, no va en el repositorio).
+- **Link de prueba:** https://reto-03-periferia.onrender.com
+- **Clave de acceso al link:** `periferia2026` (se escribe arriba a la derecha del chat). Protege el saldo de la clave del modelo; el servidor además tiene topes de tokens por sesión y globales.
+- El plan gratuito de Render se duerme tras 15 minutos sin uso: la primera visita puede tardar unos 50 segundos.
 - Documento de la solución: [SOLUCION.md](SOLUCION.md)
 
 ## Requisitos

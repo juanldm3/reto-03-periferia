@@ -52,7 +52,15 @@ La analista administrativa digita a mano cada OC en SAP y revisa de memoria si q
 - **Proveedor y modelo:** Anthropic, `claude-sonnet-5-5` (configurable con `LLM_MODEL`).
 - **Por qué:** sigue bien instrucciones de uso de herramientas y de "no afirmes lo que no viene de una herramienta", y responde en español con tablas limpias. Haiku sería más barato; lo dejé como alternativa por variable de entorno.
 - **Cambio de proveedor:** `src/llm/openai.ts` implementa la misma interfaz `enviar(mensajes, herramientas)`. Con `LLM_PROVIDER=openai` el ciclo no cambia.
-- **Costo estimado por caso** (estimación, no medición): un caso típico son 4–6 llamadas al modelo. Como el historial se reenvía, suman unos 30.000–40.000 tokens de entrada y 1.000–2.000 de salida. Con precios publicados de USD 2 por millón de entrada y USD 10 por millón de salida, da **aprox. USD 0,07–0,10 por caso**. La respuesta de `/api/chat` trae `tokensSesion` para medirlo en la defensa. Bajarlo: usar caché de prompt para el system prompt o resumir resultados de herramientas.
+- **Costo por caso (medido en prueba real con `claude-sonnet-5-5`):**
+
+  | Caso | Tokens totales de la sesión |
+  |---|---|
+  | sol-001 (crea directo) | 24.346 |
+  | sol-003 (bloqueo) | 16.829 |
+  | sol-004 (dos turnos: pregunta + "confirmo") | 41.668 |
+
+  Casi todo es entrada, porque el historial y los resultados de herramientas se reenvían en cada iteración. Con los precios publicados (USD 2 por millón de entrada, USD 10 por millón de salida) da **aprox. USD 0,04–0,06 por caso simple y USD 0,10 por caso con confirmación**. La respuesta de `/api/chat` trae `tokensSesion` para medirlo en vivo. Bajarlo: caché de prompt para el system prompt y las definiciones de herramientas, o enviar al modelo un resumen de `oc_leer_paquete` en vez del texto completo de la cotización.
 
 ## 5. Matriz de controles
 
@@ -166,7 +174,8 @@ Para la dirección, en corto:
 | HU-5 Crear OC | Hecho (mock, idempotente, control.csv) | Adaptador real (sección 6). |
 | HU-6 Errores | Hecho (`{ ok:false, error }`, JSON malformado, montos no numéricos, adjuntos faltantes) | Pruebas con paquetes corruptos reales. |
 | Front de chat | Hecho | Streaming y autenticación de usuarios. |
-| Link público | Ver README | — |
+| Agente con modelo real | Probado con `claude-sonnet-5-5`, los 6 casos: sol-001 crea; sol-002 bloquea por RC1; sol-003 bloquea por RC2; sol-004 pregunta y crea tras "confirmo" (también en la URL pública); sol-005 pide confirmación y marca retroactiva; sol-006 pide confirmar el IVA derivado | Evaluación sistemática de respuestas del modelo (más casos y variaciones de redacción). |
+| Link público | Hecho: https://reto-03-periferia.onrender.com (Render, plan gratuito) | Plan pago o despliegue corporativo para evitar que se duerma y para disco persistente. |
 | Bonus `modulo/` | Hecho | Se regenera con `npm run modulo` desde las mismas fuentes. |
 
 ## 11. Uso de IA
